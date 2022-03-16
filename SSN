@@ -1,0 +1,68 @@
+import java.util.Scanner;
+
+import static java.lang.Math.random;
+
+public class HolbrookA4 {
+
+        public static void main(String args[]){
+
+            //Create an instance of Scanner class
+            Scanner keyboard = new Scanner(System.in);
+
+            //Random number generator
+            int percent = (int)(Math.random());
+
+            System.out.print("Enter a SSN: ");
+            //read input from user
+            String userSSN = keyboard.nextLine();
+            //Call the method isValid with string input
+            
+            //THIS IS THE PART I KNOW I DID SOMETHING WRONG but I'm willing to look stupid in order to learn
+            
+            if(isValid(userSSN))
+                System.out.println(userSSN+" is a valid social security number");
+            else if(percent >= 1 && percent <=20)
+                System.out.println("You entered an invalid Social Security Number.");
+            else if(percent >= 21 && percent <= 60)
+                System.out.println("Can't you follow directions?");
+            else if(percent >= 61 && percent <=100)
+                System.out.println("You are not very smart are you?");
+
+        }
+
+        private static boolean isValid(String SSN){
+
+            //set a boolean value isValidSSN to false
+            boolean valid_SSN = true;
+
+            //Check that the length of SSN is 11
+            if(SSN.length()==11)
+            {
+                //Make sure the character in positions 3 and 6 are '-'
+                if( (SSN.charAt(3)=='-') && (SSN.charAt(6)=='-') )
+                {
+                    //Delete '-'
+                    SSN = SSN.replaceAll("-", "");
+                    int index=0;
+
+                    while(index < SSN.length() && valid_SSN)
+                    {
+                        if(!Character.isDigit(SSN.charAt(index)))
+                            valid_SSN = false;
+
+                        index++;
+                    }
+                }
+                else
+                    //set invalid
+                    valid_SSN = false;
+            }
+            else
+                //set invalid
+                valid_SSN = false;
+
+            //return the boolean variable
+            return valid_SSN;
+        }
+
+    }
